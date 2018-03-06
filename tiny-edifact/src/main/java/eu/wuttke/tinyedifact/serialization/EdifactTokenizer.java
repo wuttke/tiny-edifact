@@ -51,8 +51,8 @@ public class EdifactTokenizer {
 						extractStoredChars());
 				
 				// ignore trailing space after segment end
-				while (currentChar.charValue() == '\r' ||
-						currentChar.charValue() == '\n') {
+				while (currentChar != null && 
+					(currentChar.charValue() == '\r' || currentChar.charValue() == '\n')) {
 					readNextChar();
 				}
 				
@@ -104,7 +104,7 @@ public class EdifactTokenizer {
 			isEscaped = false;
 		}
 		
-		if (currentChar.charValue() == separators.getReleaseCharacter()) {
+		if (currentChar != null && currentChar.charValue() == separators.getReleaseCharacter()) {
 			currentChar = getNextChar();
 			isEscaped = true;
 		}
