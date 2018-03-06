@@ -5,6 +5,8 @@ import java.util.LinkedList;
 
 import eu.wuttke.tinyedifact.segments.InterchangeHeaderSegment;
 import eu.wuttke.tinyedifact.segments.InterchangeTrailerSegment;
+import eu.wuttke.tinyedifact.segments.MessageHeaderSegment;
+import eu.wuttke.tinyedifact.segments.MessageTrailerSegment;
 import eu.wuttke.tinyedifact.structure.Interchange;
 import eu.wuttke.tinyedifact.structure.Message;
 import junit.framework.TestCase;
@@ -13,6 +15,10 @@ public class SerializerTest
 extends TestCase {
 
 	public void testSerialize() {
+		Message m = new Message();
+		// UNH+00001+KOTR:01:001:KV'
+		m.getSegments().add(new MessageHeaderSegment("123", "KOTR", "01", "001", "KV"));
+		m.getSegments().add(new MessageTrailerSegment(2, "123"));
 		Interchange i = new Interchange();
 		Date d = new Date();
 		i.setInterchangeHeader(
@@ -20,9 +26,11 @@ extends TestCase {
 				"104027544", "999999999", d, "00078", null, "KOTR0000078"));
 		i.setInterchangeTrailer(new InterchangeTrailerSegment(1, "00078"));
 		i.setMessages(new LinkedList<Message>());
+		i.getMessages().add(m);
 		EdifactSeparators sep = new EdifactSeparators();
 		EdifactSerializer ser = new EdifactSerializer();
 		String str = ser.serializeInterchange(i, sep, true);
+		System.out.println(str);
 		assertTrue(str.length() > 0);
 	}
 	

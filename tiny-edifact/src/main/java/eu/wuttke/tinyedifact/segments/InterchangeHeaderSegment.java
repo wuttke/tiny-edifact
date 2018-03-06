@@ -1,11 +1,9 @@
 package eu.wuttke.tinyedifact.segments;
 
 import java.util.Date;
-import java.util.LinkedList;
 
 import eu.wuttke.tinyedifact.structure.CompositeSegmentElement;
 import eu.wuttke.tinyedifact.structure.DataSegment;
-import eu.wuttke.tinyedifact.structure.SegmentElement;
 import eu.wuttke.tinyedifact.structure.SimpleSegmentElement;
 import eu.wuttke.tinyedifact.util.DateUtil;
 
@@ -19,7 +17,6 @@ extends DataSegment {
 			String recipientReference,
 			String applicationReference) {
 		setCode("UNB");
-		setElements(new LinkedList<SegmentElement>());
 		getElements().add(new CompositeSegmentElement("UNOC", "3"));
 		getElements().add(new CompositeSegmentElement(senderIdentification));
 		getElements().add(new CompositeSegmentElement(recipientIdentification));
