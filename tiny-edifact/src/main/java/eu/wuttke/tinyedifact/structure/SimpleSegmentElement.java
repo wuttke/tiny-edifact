@@ -16,4 +16,12 @@ public class SimpleSegmentElement extends SegmentElement {
 		this.value = value;
 	}
 	
+	@Override
+	public String toString() {
+		if (getValue() == null)
+			return "NULL";
+		else
+			return "'" + getValue() + "'";
+	}
+	
 }

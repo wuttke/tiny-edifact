@@ -1,12 +1,13 @@
 package eu.wuttke.tinyedifact.structure;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class DataSegment {
 
 	private String code;
 	private String value;
-	private List<SegmentElement> elements;
+	private List<SegmentElement> elements = new LinkedList<SegmentElement>();
 	
 	public String getCode() {
 		return code;
@@ -30,6 +31,23 @@ public class DataSegment {
 	
 	public void setElements(List<SegmentElement> elements) {
 		this.elements = elements;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(getCode());
+		if (value != null) {
+			sb.append(":" + value);
+		}
+		sb.append("> ");
+		
+		for (int i = 0; i < elements.size(); i++) {
+			if (i > 0)
+				sb.append("; ");
+			sb.append(elements.get(i).toString());
+		}
+		return sb.toString();
 	}
 	
 }

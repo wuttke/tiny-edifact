@@ -85,7 +85,7 @@ public class EdifactTokenizer {
 	}
 
 	private boolean isControlCharacter() {
-		if (isEscaped)
+		if (isEscaped || currentChar == null)
 			return false;
 		if (currentChar.charValue() == separators.getComponentDataElementSeparator())
 			return true;
