@@ -4,6 +4,10 @@ public class SimpleSegmentElement extends SegmentElement {
 
 	private String value;
 
+	public SimpleSegmentElement(String v) {
+		setValue(v);
+	}
+	
 	public String getValue() {
 		return value;
 	}

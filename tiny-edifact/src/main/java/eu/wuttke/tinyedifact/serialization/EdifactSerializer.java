@@ -17,6 +17,12 @@ public class EdifactSerializer {
 			EdifactSeparators separators, 
 			boolean includeNewlines) {
 		StringBuilder sb = new StringBuilder();
+		
+		sb.append("UNA");
+		sb.append(separators.generateServiceStringAdvice());
+		if (includeNewlines)
+			sb.append("\n");
+		
 		List<DataSegment> segments = collectSegments(i);
 		for (DataSegment segment : segments) {
 			sb.append(serializeSegment(segment, separators));
@@ -78,19 +84,24 @@ public class EdifactSerializer {
 
 	private List<DataSegment> collectSegments(Interchange i) {
 		List<DataSegment> segments = new LinkedList<DataSegment>();
+		segments.add(i.getInterchangeHeader());
 		if (i.getMessageGroups() != null) {
 			for (MessageGroup mg : i.getMessageGroups()) {
+				segments.add(mg.getFunctionalGroupHeader());
 				collectSegments(mg.getMessages(), segments);
+				segments.add(mg.getFunctionalGroupTrailer());
 			}
 		} else {
 			collectSegments(i.getMessages(), segments);
 		}
+		segments.add(i.getInterchangeTrailer());
 		return segments;
 	}
 
 	private void collectSegments(List<Message> messages, List<DataSegment> segments) {
-		for (Message message : messages)
+		for (Message message : messages) {
 			segments.addAll(message.getSegments());
+		}
 	}
 	
 }
