@@ -1,14 +1,17 @@
 package eu.wuttke.tinyedifact.messages;
 
+import java.util.LinkedList;
 import java.util.List;
 
+import eu.wuttke.tinyedifact.segments.MessageGroupHeaderSegment;
+import eu.wuttke.tinyedifact.segments.MessageGroupTrailerSegment;
 import eu.wuttke.tinyedifact.structure.DataSegment;
 
 public class MessageGroup {
 
-	private DataSegment functionalGroupHeader;
-	private List<Message> messages;
-	private DataSegment functionalGroupTrailer;
+	private MessageGroupHeaderSegment functionalGroupHeader;
+	private List<Message> messages = new LinkedList<Message>();
+	private MessageGroupTrailerSegment functionalGroupTrailer;
 
 	public List<Message> getMessages() {
 		return messages;
@@ -22,7 +25,7 @@ public class MessageGroup {
 		return functionalGroupHeader;
 	}
 
-	public void setFunctionalGroupHeader(DataSegment functionalGroupHeader) {
+	public void setFunctionalGroupHeader(MessageGroupHeaderSegment functionalGroupHeader) {
 		this.functionalGroupHeader = functionalGroupHeader;
 	}
 
@@ -30,7 +33,7 @@ public class MessageGroup {
 		return functionalGroupTrailer;
 	}
 
-	public void setFunctionalGroupTrailer(DataSegment functionalGroupTrailer) {
+	public void setFunctionalGroupTrailer(MessageGroupTrailerSegment functionalGroupTrailer) {
 		this.functionalGroupTrailer = functionalGroupTrailer;
 	}
 	

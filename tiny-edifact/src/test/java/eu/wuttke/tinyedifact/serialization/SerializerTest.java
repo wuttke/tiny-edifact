@@ -3,8 +3,8 @@ package eu.wuttke.tinyedifact.serialization;
 import java.util.Date;
 import java.util.LinkedList;
 
+import eu.wuttke.tinyedifact.exchange.InterchangeFormatter;
 import eu.wuttke.tinyedifact.messages.Interchange;
-import eu.wuttke.tinyedifact.messages.InterchangeFormatter;
 import eu.wuttke.tinyedifact.messages.Message;
 import eu.wuttke.tinyedifact.segments.InterchangeHeaderSegment;
 import eu.wuttke.tinyedifact.segments.InterchangeTrailerSegment;
@@ -18,8 +18,8 @@ extends TestCase {
 	public void testSerialize() {
 		Message m = new Message();
 		// UNH+00001+KOTR:01:001:KV'
-		m.getSegments().add(new MessageHeaderSegment("123", "KOTR", "01", "001", "KV"));
-		m.getSegments().add(new MessageTrailerSegment(2, "123"));
+		m.setMessageHeaderSegment(new MessageHeaderSegment("123", "KOTR", "01", "001", "KV"));
+		m.setMessageTrailerSegment(new MessageTrailerSegment(2, "123"));
 		Interchange i = new Interchange();
 		Date d = new Date();
 		i.setInterchangeHeader(

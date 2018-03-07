@@ -2,14 +2,16 @@ package eu.wuttke.tinyedifact.messages;
 
 import java.util.List;
 
+import eu.wuttke.tinyedifact.segments.InterchangeHeaderSegment;
+import eu.wuttke.tinyedifact.segments.InterchangeTrailerSegment;
 import eu.wuttke.tinyedifact.structure.DataSegment;
 
 public class Interchange {
 
-	private DataSegment interchangeHeader;
+	private InterchangeHeaderSegment interchangeHeader;
 	private List<MessageGroup> messageGroups;
 	private List<Message> messages;
-	private DataSegment interchangeTrailer;
+	private InterchangeTrailerSegment interchangeTrailer;
 	
 	public List<MessageGroup> getMessageGroups() {
 		return messageGroups;
@@ -31,7 +33,7 @@ public class Interchange {
 		return interchangeHeader;
 	}
 
-	public void setInterchangeHeader(DataSegment interchangeHeader) {
+	public void setInterchangeHeader(InterchangeHeaderSegment interchangeHeader) {
 		this.interchangeHeader = interchangeHeader;
 	}
 
@@ -39,7 +41,7 @@ public class Interchange {
 		return interchangeTrailer;
 	}
 
-	public void setInterchangeTrailer(DataSegment interchangeTrailer) {
+	public void setInterchangeTrailer(InterchangeTrailerSegment interchangeTrailer) {
 		this.interchangeTrailer = interchangeTrailer;
 	}
 	
