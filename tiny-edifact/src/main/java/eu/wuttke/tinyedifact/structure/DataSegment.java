@@ -8,7 +8,21 @@ public class DataSegment {
 	private String code;
 	private String value;
 	private List<SegmentElement> elements = new LinkedList<SegmentElement>();
-	
+
+	public String getValue(int group, int key) {
+		if (key < 0 || group < 0 || group >= getElements().size())
+			return null;
+		SegmentElement element = getElements().get(group);
+		if (key > 0 && element instanceof SimpleSegmentElement)
+			return null;
+		if (element instanceof SimpleSegmentElement)
+			return ((SimpleSegmentElement)element).getValue();
+		else {
+			CompositeSegmentElement cse = (CompositeSegmentElement)element;
+			return cse.getValue(key);
+		}
+	}
+
 	public String getCode() {
 		return code;
 	}

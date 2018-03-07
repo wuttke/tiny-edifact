@@ -13,14 +13,13 @@ public class CompositeSegmentElement extends SegmentElement {
 				Arrays.asList(values)));
 	}
 
-	public List<String> getValues() {
-		return values;
+	public String getValue(int key) {
+		if (key < 0 || key >= getValues().size())
+			return null;
+		else
+			return getValues().get(key);
 	}
 
-	public void setValues(List<String> values) {
-		this.values = values;
-	}
-	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -33,6 +32,14 @@ public class CompositeSegmentElement extends SegmentElement {
 		}
 		sb.append("]");
 		return sb.toString();
+	}
+
+	public List<String> getValues() {
+		return values;
+	}
+
+	public void setValues(List<String> values) {
+		this.values = values;
 	}
 	
 }
