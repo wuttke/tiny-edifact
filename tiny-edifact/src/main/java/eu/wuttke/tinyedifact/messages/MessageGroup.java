@@ -1,6 +1,8 @@
-package eu.wuttke.tinyedifact.structure;
+package eu.wuttke.tinyedifact.messages;
 
 import java.util.List;
+
+import eu.wuttke.tinyedifact.structure.DataSegment;
 
 public class MessageGroup {
 

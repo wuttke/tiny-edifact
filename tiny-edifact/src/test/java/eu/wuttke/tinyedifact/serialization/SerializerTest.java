@@ -3,12 +3,13 @@ package eu.wuttke.tinyedifact.serialization;
 import java.util.Date;
 import java.util.LinkedList;
 
+import eu.wuttke.tinyedifact.messages.Interchange;
+import eu.wuttke.tinyedifact.messages.InterchangeFormatter;
+import eu.wuttke.tinyedifact.messages.Message;
 import eu.wuttke.tinyedifact.segments.InterchangeHeaderSegment;
 import eu.wuttke.tinyedifact.segments.InterchangeTrailerSegment;
 import eu.wuttke.tinyedifact.segments.MessageHeaderSegment;
 import eu.wuttke.tinyedifact.segments.MessageTrailerSegment;
-import eu.wuttke.tinyedifact.structure.Interchange;
-import eu.wuttke.tinyedifact.structure.Message;
 import junit.framework.TestCase;
 
 public class SerializerTest 
@@ -28,8 +29,8 @@ extends TestCase {
 		i.setMessages(new LinkedList<Message>());
 		i.getMessages().add(m);
 		EdifactSeparators sep = new EdifactSeparators();
-		EdifactSerializer ser = new EdifactSerializer();
-		String str = ser.serializeInterchange(i, sep, true);
+		InterchangeFormatter ser = new InterchangeFormatter();
+		String str = ser.formatInterchange(i, sep, true);
 		System.out.println(str);
 		assertTrue(str.length() > 0);
 	}

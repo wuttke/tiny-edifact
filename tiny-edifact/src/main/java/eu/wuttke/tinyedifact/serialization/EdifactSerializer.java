@@ -1,36 +1,11 @@
 package eu.wuttke.tinyedifact.serialization;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import eu.wuttke.tinyedifact.structure.CompositeSegmentElement;
 import eu.wuttke.tinyedifact.structure.DataSegment;
-import eu.wuttke.tinyedifact.structure.Interchange;
-import eu.wuttke.tinyedifact.structure.Message;
-import eu.wuttke.tinyedifact.structure.MessageGroup;
 import eu.wuttke.tinyedifact.structure.SegmentElement;
 import eu.wuttke.tinyedifact.structure.SimpleSegmentElement;
 
 public class EdifactSerializer {
-
-	public String serializeInterchange(Interchange i, 
-			EdifactSeparators separators, 
-			boolean includeNewlines) {
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append("UNA");
-		sb.append(separators.generateServiceStringAdvice());
-		if (includeNewlines)
-			sb.append("\n");
-		
-		List<DataSegment> segments = collectSegments(i);
-		for (DataSegment segment : segments) {
-			sb.append(serializeSegment(segment, separators));
-			if (includeNewlines)
-				sb.append("\n");
-		}
-		return sb.toString();
-	}
 
 	public String serializeSegment(DataSegment segment, EdifactSeparators separators) {
 		StringBuilder sb = new StringBuilder();
@@ -80,28 +55,6 @@ public class EdifactSerializer {
 				Character.toString(separators.getSegmentTerminator()), 
 				Character.toString(separators.getReleaseCharacter()) + separators.getSegmentTerminator());
 		return value;
-	}
-
-	private List<DataSegment> collectSegments(Interchange i) {
-		List<DataSegment> segments = new LinkedList<DataSegment>();
-		segments.add(i.getInterchangeHeader());
-		if (i.getMessageGroups() != null) {
-			for (MessageGroup mg : i.getMessageGroups()) {
-				segments.add(mg.getFunctionalGroupHeader());
-				collectSegments(mg.getMessages(), segments);
-				segments.add(mg.getFunctionalGroupTrailer());
-			}
-		} else {
-			collectSegments(i.getMessages(), segments);
-		}
-		segments.add(i.getInterchangeTrailer());
-		return segments;
-	}
-
-	private void collectSegments(List<Message> messages, List<DataSegment> segments) {
-		for (Message message : messages) {
-			segments.addAll(message.getSegments());
-		}
 	}
 	
 }

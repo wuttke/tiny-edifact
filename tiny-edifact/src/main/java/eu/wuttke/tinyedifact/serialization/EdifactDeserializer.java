@@ -22,7 +22,13 @@ public class EdifactDeserializer {
 
 	/*
 	public Interchange parseInterchangeAndSeparators(String str) {
+		Interchange i = new Interchange();
 		List<DataSegment> segments = parseSegments(str);
+		i.setInterchangeHeader(findAndRemoveSegment(segments, InterchangeHeaderSegment.CODE));
+		i.setInterchangeTrailer(findAndRemoveSegment(segments, InterchangeTrailerSegment.CODE));
+		// change type from DataSegment to successor
+		if haveUng parseGroups
+		else parseMessages
 		return convertSegmentsToInterchange(segments);
 	}*/
 

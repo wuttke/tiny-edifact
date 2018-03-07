@@ -1,7 +1,9 @@
-package eu.wuttke.tinyedifact.structure;
+package eu.wuttke.tinyedifact.messages;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import eu.wuttke.tinyedifact.structure.DataSegment;
 
 public class Message {
 
