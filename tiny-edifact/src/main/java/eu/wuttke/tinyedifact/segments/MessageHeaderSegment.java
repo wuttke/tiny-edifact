@@ -6,9 +6,13 @@ import eu.wuttke.tinyedifact.structure.SimpleSegmentElement;
 
 public class MessageHeaderSegment extends DataSegment {
 
+	public static final String CODE = "UNH";
+
+	public MessageHeaderSegment() {
+	}
+	
 	// https://www.stylusstudio.com/edifact/40100/UNH_.htm
 	// UNH+00001+KOTR:01:001:KV'
-	public static final String CODE = "UNH";
 
 	public MessageHeaderSegment(String messageReference,
 			String messageType, String versionNumber,

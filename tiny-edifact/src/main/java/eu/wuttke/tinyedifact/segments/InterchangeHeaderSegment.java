@@ -12,6 +12,9 @@ extends DataSegment {
 	
 	public static final String CODE = "UNB";
 	
+	public InterchangeHeaderSegment() {
+	}
+	
 	public InterchangeHeaderSegment(String senderIdentification,
 			String recipientIdentification,
 			Date dateTimePreparation,

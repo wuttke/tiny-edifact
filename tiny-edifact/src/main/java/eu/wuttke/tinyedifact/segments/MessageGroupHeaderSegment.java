@@ -11,7 +11,11 @@ public class MessageGroupHeaderSegment extends DataSegment {
 
 	public static final String CODE = "UNG";
 
+	public MessageGroupHeaderSegment() {
+	}
+	
 	// https://www.stylusstudio.com/edifact/40100/UNG_.htm
+	
 	public MessageGroupHeaderSegment(String groupIdent, String senderIdentification,
 			String recipientIdentification, Date dateTimePreparation, 
 			String groupReference) {

@@ -8,6 +8,9 @@ extends DataSegment {
 	
 	public static final String CODE = "UNZ";
 
+	public InterchangeTrailerSegment() {
+	}
+	
 	public InterchangeTrailerSegment(int interchangeControlCount, 
 			String interchangeControlReference) {
 		setCode(CODE);

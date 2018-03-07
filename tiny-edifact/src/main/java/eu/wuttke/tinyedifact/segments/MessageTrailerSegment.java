@@ -5,9 +5,13 @@ import eu.wuttke.tinyedifact.structure.SimpleSegmentElement;
 
 public class MessageTrailerSegment extends DataSegment {
 
-	// https://www.stylusstudio.com/edifact/40100/UNT_.htm
-	// UNT+000008+00001'
+	public MessageTrailerSegment() {
+	}
+	
 	public static final String CODE = "UNT";
+	
+	// https://www.stylusstudio.com/edifact/40100/UNT_.htm
+	// UNT+000008+00001'	
 
 	public MessageTrailerSegment(int numberOfSegments, String messageReference) {
 		setCode(CODE);
