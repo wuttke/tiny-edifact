@@ -1,8 +1,11 @@
-package eu.wuttke.tinyedifact.messages;
+package eu.wuttke.tinyedifact.exchange;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import eu.wuttke.tinyedifact.messages.Interchange;
+import eu.wuttke.tinyedifact.messages.Message;
+import eu.wuttke.tinyedifact.messages.MessageGroup;
 import eu.wuttke.tinyedifact.serialization.EdifactSeparators;
 import eu.wuttke.tinyedifact.serialization.EdifactSerializer;
 import eu.wuttke.tinyedifact.structure.DataSegment;
@@ -52,7 +55,11 @@ public class InterchangeFormatter {
 
 	private void collectSegments(List<Message> messages, List<DataSegment> segments) {
 		for (Message message : messages) {
+			if (message.getMessageHeaderSegment() != null)
+				segments.add(message.getMessageHeaderSegment());
 			segments.addAll(message.getSegments());
+			if (message.getMessageTrailerSegment() != null)
+				segments.add(message.getMessageTrailerSegment());
 		}
 	}
 }
