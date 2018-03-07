@@ -18,4 +18,8 @@ public class MessageHeaderSegment extends DataSegment {
 				messageType, versionNumber, messageReleaseNumber, controllingAgency));
 	}
 	
+	public String getMessageType() {
+		return getValue(1, 0);
+	}
+	
 }
