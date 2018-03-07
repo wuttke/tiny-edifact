@@ -9,11 +9,13 @@ import eu.wuttke.tinyedifact.util.DateUtil;
 
 public class MessageGroupHeaderSegment extends DataSegment {
 
+	public static final String CODE = "UNG";
+
 	// https://www.stylusstudio.com/edifact/40100/UNG_.htm
 	public MessageGroupHeaderSegment(String groupIdent, String senderIdentification,
 			String recipientIdentification, Date dateTimePreparation, 
 			String groupReference) {
-		setCode("UNG");
+		setCode(CODE);
 		
 		if (groupIdent != null)
 			getElements().add(new SimpleSegmentElement(groupIdent));
