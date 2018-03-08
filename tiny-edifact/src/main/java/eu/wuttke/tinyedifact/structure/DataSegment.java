@@ -22,6 +22,31 @@ public class DataSegment {
 			return cse.getValue(key);
 		}
 	}
+	
+	public void setValue(int group, int key, String value) {
+		if (key < 0 || group < 0)
+			throw new IllegalArgumentException("need positive key/group");
+		while (group >= elements.size())
+			elements.add(new SimpleSegmentElement(null));
+		
+		SegmentElement element = elements.get(group);
+		if (key == 0) {
+			if (element instanceof SimpleSegmentElement)
+				((SimpleSegmentElement)element).setValue(value);
+			else 
+				((CompositeSegmentElement)element).setValue(key, value);
+		} else {
+			if (element instanceof SimpleSegmentElement) {
+				// need to convert from Simple to Composite
+				int index = elements.indexOf(element);
+				element = new CompositeSegmentElement(((SimpleSegmentElement)element).getValue());
+				elements.set(index, element);
+            }
+
+			CompositeSegmentElement composite = (CompositeSegmentElement)element;
+			composite.setValue(key, value);
+		}
+	}
 
 	public String getCode() {
 		return code;

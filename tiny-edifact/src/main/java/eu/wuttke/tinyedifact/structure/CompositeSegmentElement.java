@@ -14,10 +14,20 @@ public class CompositeSegmentElement extends SegmentElement {
 	}
 
 	public String getValue(int key) {
-		if (key < 0 || key >= getValues().size())
+		if (key < 0)
+			throw new IllegalArgumentException("key must be positive");
+		if (key >= getValues().size())
 			return null;
 		else
 			return getValues().get(key);
+	}
+
+	public void setValue(int key, String value) {
+		if (key < 0)
+			throw new IllegalArgumentException("key must be positive");
+		while (key >= values.size())
+			values.add(null);
+		values.set(key, value);
 	}
 
 	@Override
