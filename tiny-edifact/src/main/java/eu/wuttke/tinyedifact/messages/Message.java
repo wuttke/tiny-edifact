@@ -13,6 +13,13 @@ public class Message {
 	private MessageTrailerSegment messageTrailerSegment;
 	private List<DataSegment> segments = new LinkedList<DataSegment>();
 
+	public DataSegment findFirstSegmentByCode(String code) {
+		for (DataSegment segment : getSegments())
+			if (segment.getCode().equals(code))
+				return segment;
+		return null;
+	}
+
 	public List<DataSegment> getSegments() {
 		return segments;
 	}
