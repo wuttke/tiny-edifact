@@ -54,12 +54,9 @@ public class InterchangeFormatter {
 	}
 
 	private void collectSegments(List<Message> messages, List<DataSegment> segments) {
+		MessageFormatter messageFormatter = new MessageFormatter();
 		for (Message message : messages) {
-			if (message.getMessageHeaderSegment() != null)
-				segments.add(message.getMessageHeaderSegment());
-			segments.addAll(message.getSegments());
-			if (message.getMessageTrailerSegment() != null)
-				segments.add(message.getMessageTrailerSegment());
+			messageFormatter.collectSegments(message, segments);
 		}
 	}
 }
