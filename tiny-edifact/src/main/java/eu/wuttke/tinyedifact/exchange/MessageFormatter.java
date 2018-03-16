@@ -28,7 +28,14 @@ public class MessageFormatter {
 		return sb.toString();
 	}
 
-	public void collectSegments(Message message, List<DataSegment> segments) {
+	public void trimMessage(Message message) {
+		List<DataSegment> segments = new LinkedList<DataSegment>();
+		collectSegments(message, segments);
+		for (DataSegment segment : segments)
+			segment.trimEmptyTrailingElementsAndValues();
+	}
+	
+	protected void collectSegments(Message message, List<DataSegment> segments) {
 		if (message.getMessageHeaderSegment() != null)
 			segments.add(message.getMessageHeaderSegment());
 		segments.addAll(message.getSegments());

@@ -9,6 +9,27 @@ public class DataSegment {
 	private String value;
 	private List<SegmentElement> elements = new LinkedList<SegmentElement>();
 
+	public void trimEmptyTrailingElementsAndValues() {
+		trimEmptyTrailingElements();
+		trimEmptyTrailingValuesInElements();
+	}
+	
+	public void trimEmptyTrailingElements() {
+		boolean isEmpty = true;
+		while (isEmpty && elements.size() > 0) {
+			SegmentElement element = elements.get(elements.size() - 1);
+			isEmpty = element.isEmpty();
+			if (isEmpty)
+				elements.remove(element);
+		}
+	}
+
+	public void trimEmptyTrailingValuesInElements() {
+		for (SegmentElement element : elements)
+			if (element != null && element instanceof CompositeSegmentElement)
+				((CompositeSegmentElement)element).trimEmptyTrailingValues();
+	}
+	
 	public String getValue(int group, int key) {
 		if (key < 0 || group < 0 || group >= getElements().size())
 			return null;

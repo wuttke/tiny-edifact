@@ -32,8 +32,14 @@ public class InterchangeFormatter {
 		}
 		return sb.toString();
 	}
+	
+	public void trimInterchange(Interchange i) {
+		List<DataSegment> segments = collectSegments(i);
+		for (DataSegment segment : segments)
+			segment.trimEmptyTrailingElementsAndValues();
+	}
 
-	private List<DataSegment> collectSegments(Interchange i) {
+	protected List<DataSegment> collectSegments(Interchange i) {
 		List<DataSegment> segments = new LinkedList<DataSegment>();
 		if (i.getInterchangeHeader() != null)
 			segments.add(i.getInterchangeHeader());
@@ -53,7 +59,7 @@ public class InterchangeFormatter {
 		return segments;
 	}
 
-	private void collectSegments(List<Message> messages, List<DataSegment> segments) {
+	protected void collectSegments(List<Message> messages, List<DataSegment> segments) {
 		MessageFormatter messageFormatter = new MessageFormatter();
 		for (Message message : messages) {
 			messageFormatter.collectSegments(message, segments);

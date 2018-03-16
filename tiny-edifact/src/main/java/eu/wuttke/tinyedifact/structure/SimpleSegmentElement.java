@@ -24,4 +24,9 @@ public class SimpleSegmentElement extends SegmentElement {
 			return "'" + getValue() + "'";
 	}
 	
+	@Override
+	public boolean isEmpty() {
+		return value == null || value.length() == 0;
+	}
+	
 }

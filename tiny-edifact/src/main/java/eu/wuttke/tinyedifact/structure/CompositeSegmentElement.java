@@ -29,6 +29,26 @@ public class CompositeSegmentElement extends SegmentElement {
 			values.add(null);
 		values.set(key, value);
 	}
+	
+	@Override
+	public boolean isEmpty() {
+		if (values == null || values.size() == 0)
+			return true;
+		for (String value : values)
+			if (value != null && value.length() > 0)
+				return false;
+		return true;
+	}
+
+	public void trimEmptyTrailingValues() {
+		boolean isEmpty = true;
+		while (isEmpty && values.size() > 0) {
+			String str = values.get(values.size() - 1);
+			isEmpty = str == null || str.length() == 0;
+			if (isEmpty)
+				values.remove(values.size() - 1);
+		}
+	}
 
 	@Override
 	public String toString() {
